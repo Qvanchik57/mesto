@@ -8,22 +8,21 @@ let popupProfile = document.querySelector(".popup");
 profileEditButton.addEventListener("click", function () {
     profileInputTitle.value = profileTitle.textContent;
     profileInputSubtitle.value = profileSubtitle.textContent;
-    popupProfile.classList.add("popup__open");
+    openPopup("popup_open");
 });
 
 let profileFormElement = popupProfile.querySelector(".popup__form");
 
 profileFormElement.addEventListener("submit", function (e) {
     e.preventDefault();
-    profileTitle.textContent = profileInputTitle.value;
-    profileSubtitle.textContent = profileInputSubtitle.value;
-    popupProfile.classList.remove("popup__open");
+    saveProfile();
+    closePopup("popup_open");
 });
 
 let popupProfileCloseButton = document.querySelector(".popup__profile-close");
 
 popupProfileCloseButton.addEventListener("click", function() {
-    popupProfile.classList.remove("popup__open");
+    closePopup("popup_open");
 });
 
 let imageLikeButton = document.querySelectorAll(".photos__button-like");
@@ -32,4 +31,17 @@ for (let i = 0; i < imageLikeButton.length; i++) {
     imageLikeButton[i].addEventListener("click", function() {
         return imageLikeButton[i].classList.toggle("photos__button-like_active");
     });
+}
+
+function openPopup(div) {
+    popupProfile.classList.add(div);
+}
+
+function closePopup(div) {
+    popupProfile.classList.remove(div);
+}
+
+function saveProfile() {
+    profileTitle.textContent = profileInputTitle.value;
+    profileSubtitle.textContent = profileInputSubtitle.value;
 }
