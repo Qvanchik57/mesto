@@ -9,6 +9,7 @@
   .footer__copyright {
     font-size: 14px;
     line-height: 17px;
+    padding-left: 19px;
   }
 }
 
@@ -16,5 +17,6 @@
   .footer__copyright {
     font-size: 18px;
     line-height: 22px;
+    padding-left: 0px;
   }
 }
