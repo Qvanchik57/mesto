@@ -46,7 +46,7 @@ const imageDiscovery = document.querySelector('.discovery__img');
 const imageDescr = document.querySelector('.discovery__description');
 const discoveryButtonClose = document.querySelector('.discovery__close');
 
-function dropPhoto (cardLink, cardName) {
+function createCard(cardLink, cardName) {
     const photoElement = imageTemplate.cloneNode(true);
     const image = photoElement.querySelector('.photos__image');
     image.src = cardLink;
@@ -62,9 +62,9 @@ function dropPhoto (cardLink, cardName) {
     return photoElement;
 }
 
-initialCards.forEach(function(i) {
-    photosContainer.prepend(dropPhoto(i.link, i.name));
-})
+initialCards.forEach(function(card) {
+    photosContainer.prepend(createCard(card.link, card.name));
+});
 
 function openPopup(block) {
     block.classList.add("popup_open");
@@ -79,8 +79,8 @@ function saveProfile() {
     profileSubtitle.textContent = profileInputSubtitle.value;
 };
 
-function prevent(block) {
-    block.preventDefault();
+function submitFormProfile(e) {
+    e.preventDefault();
     saveProfile();
     closePopup(popupProfile);
 };
@@ -102,7 +102,7 @@ profileEditButton.addEventListener('click', function () {
   openPopup(popupProfile);
 });
 
-profileFormElement.addEventListener('submit', prevent);
+profileFormElement.addEventListener('submit', submitFormProfile);
 
 popupProfileCloseButton.addEventListener('click', function () {
   closePopup(popupProfile);
@@ -112,10 +112,9 @@ photoAddButton.addEventListener('click', function() {
   openPopup(popupPhoto);
 });
 
-photoFormElement.addEventListener('submit', function(block) {
-  block.preventDefault();
-  console.log(photoName, photoLink);
-  photosContainer.prepend(dropPhoto(photoLink.value, photoName.value));
+photoFormElement.addEventListener('submit', function(e) {
+  e.preventDefault();
+  photosContainer.prepend(createCard(photoLink.value, photoName.value));
   closePopup(popupPhoto);
   photoLink.value = null;
   photoName.value = null;
