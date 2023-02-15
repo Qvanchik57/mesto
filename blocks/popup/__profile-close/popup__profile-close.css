@@ -1,7 +1,6 @@
 .popup__profile-close {
-    background-image: url(../../../images/button-close.svg);
+    background: url(../../../images/button-close.svg);
     background-size: cover;
-    background-color: #000;
     border: 0;
     outline: none;
     margin: 0;

@@ -26,55 +26,13 @@
     </section>
     <section class="photos">
       <ul class="photos__grid">
-        <li class="photos__element">
-          <img class="photos__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-          <div class="photos__box">
-            <h2 class="photos__name">Карачаевск</h2>
-            <button class="photos__button-like" type="button"></button>
-          </div>
-        </li>
-        <li class="photos__element">
-          <img class="photos__image" src="images/dombai.jpg" alt="Домбаи">
-          <div class="photos__box">
-            <h2 class="photos__name">Домбай</h2>
-            <button class="photos__button-like" type="button"></button>
-          </div>
-        </li>
-        <li class="photos__element">
-          <img class="photos__image" src="images/elbrus.jpg" alt="Эльбрус">
-          <div class="photos__box">
-            <h2 class="photos__name">Эльбрус</h2>
-            <button class="photos__button-like" type="button"></button>
-          </div>
-        </li>
-        <li class="photos__element">
-          <img class="photos__image" src="images/dombai.jpg" alt="Домбаи">
-          <div class="photos__box">
-            <h2 class="photos__name">Домбай</h2>
-            <button class="photos__button-like" type="button"></button>
-          </div>
-        </li>
-        <li class="photos__element">
-          <img class="photos__image" src="images/elbrus.jpg" alt="Эльбрус">
-          <div class="photos__box">
-            <h2 class="photos__name">Эльбрус</h2>
-            <button class="photos__button-like" type="button"></button>
-          </div>
-        </li>
-        <li class="photos__element">
-          <img class="photos__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-          <div class="photos__box">
-            <h2 class="photos__name">Карачаево-Черкесия</h2>
-            <button class="photos__button-like" type="button"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&#169 2023 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup-profile">
     <div class="popup__container">
       <h2 class="popup__header">Редактировать профиль</h2>
       <form class="popup__form" action="#" name="profile">
@@ -85,6 +43,34 @@
       <button class="popup__profile-close" type="button"></button>
     </div>
   </div>
+  <div class="popup popup-photo">
+    <div class="popup__container">
+      <h2 class="popup__header">Новое место</h2>
+      <form class="popup__form" action="#" name="profile">
+        <input id="mesto" class="popup__input-text" type="text" name="photo_name" placeholder="Название">
+        <input id="link" class="popup__input-text" type="text" name="photo_link" placeholder="Ссылка на картинку">
+        <button class="popup__button-save" type="submit">Создать</button>
+      </form>
+      <button class="popup__profile-close popup__photo-close" type="button"></button>
+    </div>
+  </div>
+  <div class="discovery popup">
+    <div class="discovery__container">
+      <img class="discovery__img" src='' alt='' />
+      <p class="discovery__description"></p>
+      <button class="discovery__close popup__profile-close" type="button"></button>
+    </div>
+  </div>
+  <template id="card">
+    <li class="photos__element">
+      <img class="photos__image" src="" alt="">
+      <button class="photos__button-delete"></button>
+      <div class="photos__box">
+        <h2 class="photos__name"></h2>
+        <button class="photos__button-like" type="button"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/script.js"></script>
 </body>
 </html> 
