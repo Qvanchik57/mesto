@@ -31,3 +31,8 @@
 @import url(../blocks/popup/__input-text/popup__input-text.css);
 @import url(../blocks/popup/__button-save/popup____button-save.css);
 @import url(../blocks/popup/__profile-close/popup__profile-close.css);
+@import url(../blocks/photos/__button-delete/photos__button-delete.css);
+@import url(../blocks/discovery/discovery.css);
+@import url(../blocks/discovery/__container/discovery__container.css);
+@import url(../blocks/discovery/__img/discovery__img.css);
+@import url(../blocks/discovery/__decription/discovery__description.css);
