@@ -45,6 +45,7 @@ const imagePopup = document.querySelector('.discovery');
 const imageDiscovery = document.querySelector('.discovery__img');
 const imageDescr = document.querySelector('.discovery__description');
 const discoveryButtonClose = document.querySelector('.discovery__close');
+const popupOverlay = document.querySelector('.popup');
 
 function createCard(cardLink, cardName) {
     const photoElement = imageTemplate.cloneNode(true);
@@ -68,6 +69,7 @@ initialCards.forEach(function(card) {
 
 function openPopup(block) {
     block.classList.add("popup_open");
+    enableValidation();
 };
 
 function closePopup(block) {
