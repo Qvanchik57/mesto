@@ -34,8 +34,6 @@ const profileInputTitle = document.querySelector("#name");
 const profileInputSubtitle = document.querySelector("#descrip");
 const popupProfile = document.querySelector(".popup-profile");
 const profileFormElement = popupProfile.querySelector(".popup__form");
-const popupProfileCloseButton = document.querySelector(".popup__profile-close");
-const popupPhotoCloseButton = document.querySelector('.popup__photo-close');
 const photosContainer = document.querySelector('.photos__grid');
 const popupPhoto = document.querySelector('.popup-photo');
 const photoFormElement = popupPhoto.querySelector('.popup__form');
@@ -44,8 +42,7 @@ const photoLink = document.querySelector('#link');
 const imagePopup = document.querySelector('.discovery');
 const imageDiscovery = document.querySelector('.discovery__img');
 const imageDescr = document.querySelector('.discovery__description');
-const discoveryButtonClose = document.querySelector('.discovery__close');
-const popupOverlay = document.querySelector('.popup');
+const popups = Array.from(document.querySelectorAll('.popup'));
 
 function createCard(cardLink, cardName) {
     const photoElement = imageTemplate.cloneNode(true);
@@ -69,11 +66,12 @@ initialCards.forEach(function(card) {
 
 function openPopup(block) {
     block.classList.add("popup_open");
-    enableValidation();
+    document.addEventListener('keydown', closeByEscape);
 };
 
 function closePopup(block) {
     block.classList.remove("popup_open");
+    document.removeEventListener('keydown', closeByEscape);
 };
 
 function saveProfile() {
@@ -96,7 +94,14 @@ function openPhoto(link, name) {
   imageDiscovery.alt = name;
   imageDescr.textContent = name;  
   openPopup(imagePopup);
-}
+};
+
+function closeByEscape (evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_open');
+    closePopup(openedPopup);
+  }
+};
 
 profileEditButton.addEventListener('click', function () {
   profileInputTitle.value = profileTitle.textContent;
@@ -106,10 +111,6 @@ profileEditButton.addEventListener('click', function () {
 
 profileFormElement.addEventListener('submit', submitFormProfile);
 
-popupProfileCloseButton.addEventListener('click', function () {
-  closePopup(popupProfile);
-});
-
 photoAddButton.addEventListener('click', function() {
   openPopup(popupPhoto);
 });
@@ -118,14 +119,16 @@ photoFormElement.addEventListener('submit', function(e) {
   e.preventDefault();
   photosContainer.prepend(createCard(photoLink.value, photoName.value));
   closePopup(popupPhoto);
-  photoLink.value = null;
-  photoName.value = null;
-})
+  e.target.reset();
+});
 
-popupPhotoCloseButton.addEventListener('click', function() {
-  closePopup(popupPhoto);
-})
-
-discoveryButtonClose.addEventListener('click', function() {
-  closePopup(imagePopup);
-})
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_open')) {
+          closePopup(popup)
+        } 
+        if (evt.target.classList.contains('popup__profile-close')) {
+          closePopup(popup)
+        }
+    });
+});
