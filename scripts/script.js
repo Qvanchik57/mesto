@@ -107,12 +107,14 @@ profileEditButton.addEventListener('click', function () {
   profileInputTitle.value = profileTitle.textContent;
   profileInputSubtitle.value = profileSubtitle.textContent;
   openPopup(popupProfile);
+  enableValidation(settings);
 });
 
 profileFormElement.addEventListener('submit', submitFormProfile);
 
 photoAddButton.addEventListener('click', function() {
   openPopup(popupPhoto);
+  enableValidation(settings);
 });
 
 photoFormElement.addEventListener('submit', function(e) {
