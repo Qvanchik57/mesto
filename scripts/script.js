@@ -122,6 +122,8 @@ photoFormElement.addEventListener('submit', function(e) {
   photosContainer.prepend(createCard(photoLink.value, photoName.value));
   closePopup(popupPhoto);
   e.target.reset();
+  photoFormElement.querySelector(settings.selectors.buttonClass).setAttribute(settings.selectors.disabledButton, '');
+  photoFormElement.querySelector(settings.selectors.buttonClass).classList.add(settings.selectors.buttonInactive);
 });
 
 popups.forEach((popup) => {
