@@ -107,14 +107,12 @@ profileEditButton.addEventListener('click', function () {
   profileInputTitle.value = profileTitle.textContent;
   profileInputSubtitle.value = profileSubtitle.textContent;
   openPopup(popupProfile);
-  enableValidation(settings);
 });
 
 profileFormElement.addEventListener('submit', submitFormProfile);
 
 photoAddButton.addEventListener('click', function() {
   openPopup(popupPhoto);
-  enableValidation(settings);
 });
 
 photoFormElement.addEventListener('submit', function(e) {
@@ -122,6 +120,8 @@ photoFormElement.addEventListener('submit', function(e) {
   photosContainer.prepend(createCard(photoLink.value, photoName.value));
   closePopup(popupPhoto);
   e.target.reset();
+  photoFormElement.querySelector('.popup__button-save').classList.add(settings.selectors.buttonInactive);
+  photoFormElement.querySelector('.popup__button-save').setAttribute(settings.selectors.disabledButton, '');
 });
 
 popups.forEach((popup) => {
