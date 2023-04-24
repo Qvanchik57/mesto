@@ -43,6 +43,11 @@ const photoFormElement = popupPhoto.querySelector(".popup__form");
 const photoName = document.querySelector("#mesto");
 const photoLink = document.querySelector("#link");
 const popups = Array.from(document.querySelectorAll(".popup"));
+const imagePopup = document.querySelector(".discovery");
+const imageDiscovery = imagePopup.querySelector(".discovery__img");
+const discoveryDescription = imagePopup.querySelector(
+  ".discovery__description"
+);
 
 const cardSettings = {
   selectors: {
@@ -52,9 +57,9 @@ const cardSettings = {
     photosButtonDelete: ".photos__button-delete",
     photosElement: ".photos__element",
     photosButtonLikeActive: "photos__button-like_active",
-    imagePopup: ".discovery",
-    imageDiscovery: ".discovery__img",
-    discoveryDescription: ".discovery__description",
+    imagePopup: imagePopup,
+    imageDiscovery: imageDiscovery,
+    discoveryDescription: discoveryDescription,
     openPopup: ".popup_open",
   },
 };
@@ -77,22 +82,18 @@ const popupFormList = Array.from(
 );
 
 initialCards.forEach(function (card) {
-  const cards = new Card(card.name, card.link, imageTemplate, cardSettings);
+  const cards = createCard(card.name, card.link);
   const cardsElement = cards.createCard();
   photosContainer.prepend(cardsElement);
 });
 
 popupFormList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
+  formElement.addEventListener("submit", function (evt) {
     evt.preventDefault();
   });
-  const inputList = Array.from(
-    formElement.querySelectorAll(validateSettings.selectors.inputClass)
-  );  
-  const buttonElement = formElement.querySelector(validateSettings.selectors.buttonClass); 
-  const validator = new FormValidator (validateSettings, formElement, inputList, buttonElement);
+  const validator = new FormValidator(validateSettings, formElement);
   validator.enableValidation();
-})
+});
 
 function openPopup(block) {
   block.classList.add("popup_open");
@@ -122,7 +123,9 @@ function closeByEscape(evt) {
   }
 }
 
-document.addEventListener("keydown", closeByEscape);
+function createCard (cardName, cardLink) {
+  return new Card(cardName, cardLink, imageTemplate, cardSettings);
+}
 
 profileEditButton.addEventListener("click", function () {
   profileInputTitle.value = profileTitle.textContent;
@@ -138,22 +141,11 @@ photoAddButton.addEventListener("click", function () {
 
 photoFormElement.addEventListener("submit", function (e) {
   e.preventDefault();
-  const cards = new Card(
-    photoName.value,
-    photoLink.value,
-    imageTemplate,
-    cardSettings
-  );
+  const cards = createCard(photoName.value, photoLink.value);
   const cardsElement = cards.createCard();
   photosContainer.prepend(cardsElement);
   closePopup(popupPhoto);
   e.target.reset();
-  photoFormElement
-    .querySelector(validateSettings.selectors.buttonClass)
-    .setAttribute(validateSettings.selectors.disabledButton, "");
-  photoFormElement
-    .querySelector(validateSettings.selectors.buttonClass)
-    .classList.add(validateSettings.selectors.buttonInactive);
 });
 
 popups.forEach((popup) => {
@@ -166,5 +158,3 @@ popups.forEach((popup) => {
     }
   });
 });
-
-

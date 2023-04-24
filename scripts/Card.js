@@ -3,17 +3,19 @@ export class Card {
     this._templateSelector = templateSelector;
     this._cardLink = link;
     this._cardName = name;
-    this._photosImage = cardSettings.selectors.photosImage;
-    this._photosName = cardSettings.selectors.photosName;
-    this._photosButtonLike = cardSettings.selectors.photosButtonLike;
-    this._photosButtonDelete = cardSettings.selectors.photosButtonDelete;
-    this._photoElement = cardSettings.selectors.photosElement;
-    this._photosButtonLikeActive =
+    this._photosImageSelector = cardSettings.selectors.photosImage;
+    this._photosNameSelector = cardSettings.selectors.photosName;
+    this._photosButtonLikeSelector = cardSettings.selectors.photosButtonLike;
+    this._photosButtonDeleteSelector =
+      cardSettings.selectors.photosButtonDelete;
+    this._photoElementSelector = cardSettings.selectors.photosElement;
+    this._photosButtonLikeActiveSelector =
       cardSettings.selectors.photosButtonLikeActive;
-    this._imagePopup = cardSettings.selectors.imagePopup;
-    this._imageDiscovery = cardSettings.selectors.imageDiscovery;
-    this._discoveryDescription = cardSettings.selectors.discoveryDescription;
-    this._openPopup = cardSettings.selectors.openPopup;
+    this._imagePopupSelector = cardSettings.selectors.imagePopup;
+    this._imageDiscoverySelector = cardSettings.selectors.imageDiscovery;
+    this._discoveryDescriptionSelector =
+      cardSettings.selectors.discoveryDescription;
+    this._openPopupSelector = cardSettings.selectors.openPopup;
   }
 
   _getTemplate() {
@@ -23,43 +25,44 @@ export class Card {
   }
 
   createCard() {
-    this._photoElement = this._getTemplate();
-    this._image = this._photoElement.querySelector(this._photosImage);
+    this._photoElementSelector = this._getTemplate();
+    this._image = this._photoElementSelector.querySelector(
+      this._photosImageSelector
+    );
     this._image.src = this._cardLink;
     this._image.alt = this._cardName;
-    this._photoElement.querySelector(this._photosName).textContent =
-      this._cardName;
-    this._checkLike(this._photosButtonLikeActive);
-    this._openDiscoveryPhoto(
-      this._imagePopup,
-      this._imageDiscovery,
+    this._photoElementSelector.querySelector(
+      this._photosNameSelector
+    ).textContent = this._cardName;
+    this._setEventListeners(
+      this._photosButtonLikeActiveSelector,
       this._image,
-      this._discoveryDescription
+      this._photoElementSelector,
+      this._photosButtonDeleteSelector
     );
-    this._deletePhotoElement(this._photoElement, this._photosButtonDelete);
-    return this._photoElement;
+    return this._photoElementSelector;
   }
 
-  _checkLike(activeClass) {
-    this._photoElement
-      .querySelector(this._photosButtonLike)
+  _setEventListeners(activeClass, image, element, button) {
+    this._photoElementSelector
+      .querySelector(this._photosButtonLikeSelector)
       .addEventListener("click", function () {
         this.classList.toggle(activeClass);
       });
-  }
-
-  _deletePhotoElement(element, button) {
-    element.querySelector(button).addEventListener("click", function (e) {
-      e.target.parentElement.remove();
+    element.querySelector(button).addEventListener("click", function () {
+      this.parentElement.remove();
     });
-  }
-
-  _openDiscoveryPhoto(popup, srcImg, image, description) {
-    image.addEventListener("click", function () {
-      document.querySelector(popup).classList.add("popup_open");
-      document.querySelector(srcImg).src = image.src;
-      document.querySelector(srcImg).alt = image.alt;
-      document.querySelector(description).textContent = image.alt;
+    image.addEventListener("click", () => {
+      this._imagePopupSelector.classList.add("popup_open");
+      this._imageDiscoverySelector.src = image.src;
+      this._imageDiscoverySelector.alt = image.alt;
+      this._discoveryDescriptionSelector.textContent = image.alt;
+      document.addEventListener("keydown", closePopup)
     });
+    const closePopup = (evt) => {
+      if (evt.key === "Escape") {
+        this._imagePopupSelector.classList.remove("popup_open");
+      }
+    }
   }
 }
