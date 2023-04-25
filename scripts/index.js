@@ -88,16 +88,13 @@ initialCards.forEach(function (card) {
 });
 
 popupFormList.forEach((formElement) => {
-  formElement.addEventListener("submit", function (evt) {
-    evt.preventDefault();
-  });
-  const validator = new FormValidator(validateSettings, formElement);
-  validator.enableValidation();
+  checkValid(formElement);
 });
 
 function openPopup(block) {
   block.classList.add("popup_open");
   document.addEventListener("keydown", closeByEscape);
+  checkValid(block);
 }
 
 function closePopup(block) {
@@ -125,6 +122,11 @@ function closeByEscape(evt) {
 
 function createCard (cardName, cardLink) {
   return new Card(cardName, cardLink, imageTemplate, cardSettings);
+}
+
+function checkValid(block) {
+  const validator = new FormValidator(validateSettings, block);
+  validator.enableValidation();
 }
 
 profileEditButton.addEventListener("click", function () {

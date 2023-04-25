@@ -46,7 +46,6 @@ export class FormValidator {
     this._buttonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        console.log(inputElement);
         this._checkInputValidity(inputElement);
         this._buttonState(this);
       });

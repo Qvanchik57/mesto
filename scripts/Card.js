@@ -43,6 +43,13 @@ export class Card {
     return this._photoElementSelector;
   }
 
+  _closePopupEsc = (evt) => {
+    if (evt.key === "Escape") {
+      this._imagePopupSelector.classList.remove("popup_open");
+      document.removeEventListener("keydown", this._closePopupEsc);
+    } 
+  }
+
   _setEventListeners(activeClass, image, element, button) {
     this._photoElementSelector
       .querySelector(this._photosButtonLikeSelector)
@@ -57,12 +64,7 @@ export class Card {
       this._imageDiscoverySelector.src = image.src;
       this._imageDiscoverySelector.alt = image.alt;
       this._discoveryDescriptionSelector.textContent = image.alt;
-      document.addEventListener("keydown", closePopup)
+      document.addEventListener("keydown", this._closePopupEsc);
     });
-    const closePopup = (evt) => {
-      if (evt.key === "Escape") {
-        this._imagePopupSelector.classList.remove("popup_open");
-      }
-    }
   }
 }
