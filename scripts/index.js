@@ -48,6 +48,7 @@ const imageDiscovery = imagePopup.querySelector(".discovery__img");
 const discoveryDescription = imagePopup.querySelector(
   ".discovery__description"
 );
+const photosImage = photosContainer.querySelector(".photos__image");
 
 const cardSettings = {
   selectors: {
@@ -87,10 +88,6 @@ initialCards.forEach(function (card) {
   photosContainer.prepend(cardsElement);
 });
 
-popupFormList.forEach((formElement) => {
-  checkValid(formElement);
-});
-
 function openPopup(block) {
   block.classList.add("popup_open");
   document.addEventListener("keydown", closeByEscape);
@@ -121,7 +118,7 @@ function closeByEscape(evt) {
 }
 
 function createCard (cardName, cardLink) {
-  return new Card(cardName, cardLink, imageTemplate, cardSettings);
+  return new Card(cardName, cardLink, imageTemplate, cardSettings, photoAddButton);
 }
 
 function checkValid(block) {
@@ -140,6 +137,10 @@ profileFormElement.addEventListener("submit", submitFormProfile);
 photoAddButton.addEventListener("click", function () {
   openPopup(popupPhoto);
 });
+
+photosImage.addEventListener('click', () => {
+  openPopup(imagePopup);
+})
 
 photoFormElement.addEventListener("submit", function (e) {
   e.preventDefault();

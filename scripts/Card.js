@@ -1,5 +1,5 @@
 export class Card {
-  constructor(name, link, templateSelector, cardSettings) {
+  constructor(name, link, templateSelector, cardSettings, photoAddButton) {
     this._templateSelector = templateSelector;
     this._cardLink = link;
     this._cardName = name;
