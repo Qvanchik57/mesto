@@ -15,6 +15,7 @@ export class FormValidator {
     this._buttonElement = formElement.querySelector(
       settings.selectors.buttonClass
     );
+    this._photoAddButton = settings.selectors.photoAddButton;
   }
 
   _showInputError = (inputElement, errorMessage) => {
@@ -50,6 +51,7 @@ export class FormValidator {
         this._buttonState(this);
       });
     });
+    this._photoAddButton.addEventListener('click', this._buttonState);
   };
 
   enableValidation() {

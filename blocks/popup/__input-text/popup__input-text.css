@@ -14,13 +14,7 @@
 .popup__input-text:first-child {
     margin-top: 0;
 }
-
-.mesto-error {
-    height: 35px;
-    margin-top: 5px;
-}
-
-.link-error {
+.popup__input-text-error {
     height: 35px;
     margin-top: 5px;
 }
