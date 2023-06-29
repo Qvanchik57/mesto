@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" alt="Логотип мест" src="images/header-logo.svg">
+    <img class="header__logo" alt="Логотип мест" src="<%=require('./images/header-logo.svg')%>">
   </header>
   <main class="content">
     <section class="profile">
       <div class="profile__description">
-        <img class="profile__avatar" src="images/profile.jpg" alt="Фото профиля">
+        <img class="profile__avatar" src="<%=require('./images/profile.jpg')%>" alt="Фото профиля">
         <div class="profile__info">
           <div class="profile__name">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -75,8 +74,5 @@
       </div>
     </li>
   </template>
-  <script type="module" src="./scripts/index.js"></script>
-  <script type="module" src="./scripts/Card.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script>
 </body>
 </html> 

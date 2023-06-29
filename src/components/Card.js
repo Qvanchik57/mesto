@@ -1,5 +1,5 @@
 export class Card {
-  constructor(name, link, templateSelector, cardSettings, closeByEscape) {
+  constructor(name, link, templateSelector, cardSettings, closeByEscape, handleCardClick) {
     this._templateSelector = templateSelector;
     this._cardLink = link;
     this._cardName = name;
@@ -16,6 +16,7 @@ export class Card {
     this._discoveryDescriptionSelector =
       cardSettings.selectors.discoveryDescription;
     this._closeByEscape = closeByEscape;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -43,6 +44,12 @@ export class Card {
     return this._photoElementSelector;
   }
 
+  _addEventListenerImage() {
+    this._image.addEventListener("click", () => {
+      this._handleCardClick(this._cardLink, this._cardName);
+    })
+  }
+
   _setEventListeners(activeClass, image, element, button) {
     this._photoElementSelector
       .querySelector(this._photosButtonLikeSelector)
@@ -52,12 +59,6 @@ export class Card {
     element.querySelector(button).addEventListener("click", function () {
       this.parentElement.remove();
     });
-    image.addEventListener("click", () => {
-      this._imagePopupSelector.classList.add("popup_open");
-      this._imageDiscoverySelector.src = image.src;
-      this._imageDiscoverySelector.alt = image.alt;
-      this._discoveryDescriptionSelector.textContent = image.alt;
-      document.addEventListener("keydown", this._closeByEscape);
-    });
+    this._addEventListenerImage();
   }
 }
