@@ -22,7 +22,7 @@ popupFormList.forEach(function (popupForm) {
 });
 
 function createCard (cardName, cardLink) {
-  const card = new Card(cardName, cardLink, constants.imageTemplate, constants.cardSettings, openPopupImage._closeByEscape, openPopupImage.openPopup);
+  const card = new Card(cardName, cardLink, constants.imageTemplate, constants.cardSettings, openPopupImage.openPopup, handleLikeCard, handleCardDelete);
   return card.createCard();
 }
 
@@ -33,6 +33,14 @@ function checkValid(block) {
 
 function handleSubmitCards ({photo_name, photo_link}) {
   section.addItem(createCard(photo_name, photo_link));
+}
+
+function handleLikeCard (card) {
+  card.updateLikes();
+}
+
+function handleCardDelete (card) {
+  card.deleteCard();
 }
 
 constants.profileEditButton.addEventListener("click", function () {
