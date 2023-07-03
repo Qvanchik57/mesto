@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup {
         this._form = this._popup.querySelector('.popup__form');
         this._inputsForm = this._form.querySelectorAll('.popup__input-text');
         this.closePopup = this.closePopup.bind(this);
-        // this.setInputValues = this.setInputValues.bind(this);
+        this._buttonSave = this._form.querySelector('.popup__button-save');
     }
 
     _getInputValues() {
@@ -37,5 +37,6 @@ export default class PopupWithForm extends Popup {
     closePopup() {
         super.closePopup();
         this._form.reset();
+        this._buttonSave.classList.add('popup__button-save_inactive');
     }
 }

@@ -42,19 +42,17 @@ export class FormValidator {
   };
 
   _setEventListener = () => {
-    this._buttonElement = this._formElement.querySelector(this._buttonClass);
     this._buttonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._buttonState(this);
+        this._buttonState();
       });
     });
-    this._buttonElement.addEventListener('click', this._buttonState);
   };
 
   enableValidation() {
-    this._setEventListener(this);
+    this._setEventListener();
   }
 
   _invalidInput = () => {
@@ -72,4 +70,15 @@ export class FormValidator {
       this._buttonElement.removeAttribute(this._disabledButton);
     }
   };
+
+  _resetValidation() {
+    this._buttonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    })
+  }
+
+  clearValidation() {
+    this._resetValidation();
+  }
 }

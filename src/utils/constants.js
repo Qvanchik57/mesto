@@ -20,6 +20,7 @@ export const imageDiscovery = imagePopup.querySelector(".discovery__img");
 export const discoveryDescription = imagePopup.querySelector(
   ".discovery__description"
 );
+export const validationArr = [];
 
 export const cardSettings = {
   selectors: {

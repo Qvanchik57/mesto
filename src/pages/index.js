@@ -28,6 +28,7 @@ function createCard (cardName, cardLink) {
 
 function checkValid(block) {
   const validator = new FormValidator(constants.validateSettings, block);
+  constants.validationArr.push(validator);
   validator.enableValidation();
 }
 
@@ -46,10 +47,12 @@ function handleCardDelete (card) {
 constants.profileEditButton.addEventListener("click", function () {
   popupFormProfile.openPopup();
   popupFormProfile.setInputValues(userInfo.getUserInfo());
+  constants.validationArr[0].clearValidation();
 });
 
 constants.photoAddButton.addEventListener("click", function () {
   popupFormCards.openPopup();
+  constants.validationArr[1].clearValidation();
 });
 
 openPopupImage.setEventListeners();
