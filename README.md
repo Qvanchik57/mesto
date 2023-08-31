@@ -13,4 +13,4 @@
 
 Добавить количество лайков, оптимизировать для различных устройств.
 ## Ссылка на GitHubProject:  
-[Место](https://Qvanchik57.github.io/mesto)
+https://Qvanchik57.github.io/mesto
