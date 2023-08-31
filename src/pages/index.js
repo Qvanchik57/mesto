@@ -104,7 +104,7 @@ constants.photoAddButton.addEventListener("click", function () {
 
 constants.avatarEditButton.addEventListener("click", function () {
   popupFormAvatar.openPopup();
-  
+  constants.validationArr[2].clearValidation();
 })
 
 openPopupImage.setEventListeners();
