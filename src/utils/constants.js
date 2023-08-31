@@ -3,8 +3,6 @@ export const profileEditButton = document.querySelector(".profile__edit-button")
 export const photoAddButton = document.querySelector(".profile__add-button");
 export const profileTitle = document.querySelector(".profile__title");
 export const profileSubtitle = document.querySelector(".profile__subtitle");
-export const profileInputTitle = document.querySelector("#name");
-export const profileInputSubtitle = document.querySelector("#descrip");
 export const popupProfile = document.querySelector(".popup-profile");
 export const popupProfileName = ".popup-profile";
 export const profileFormElement = popupProfile.querySelector(".popup__form");
@@ -12,15 +10,23 @@ export const photosContainer = ".photos__grid";
 export const popupPhoto = document.querySelector(".popup-photo");
 export const popupPhotoName = ".popup-photo";
 export const photoFormElement = popupPhoto.querySelector(".popup__form");
-export const photoName = document.querySelector("#mesto");
-export const photoLink = document.querySelector("#link");
-const popups = Array.from(document.querySelectorAll(".popup"));
 export const imagePopup = document.querySelector(".discovery");
 export const imageDiscovery = imagePopup.querySelector(".discovery__img");
 export const discoveryDescription = imagePopup.querySelector(
   ".discovery__description"
 );
+export const popupAvatar = '.popup-avatar';
+export const avatarEditButton = document.querySelector('.profile__avatar-edit');
 export const validationArr = [];
+export const settingsApi = {
+  myUrl: "https://nomoreparties.co/v1/cohort-73",
+  headers: {
+    authorization: '971e39b8-a27e-431a-ad97-ff510d1ae105',
+    'Content-Type': 'application/json'
+  }
+}
+export const initialCards = []
+export const userId = {};
 
 export const cardSettings = {
   selectors: {
@@ -50,32 +56,3 @@ export const validateSettings = {
     photoAddButton: photoAddButton,
   },
 };
-
-export {popups as aria};
-
-export const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
