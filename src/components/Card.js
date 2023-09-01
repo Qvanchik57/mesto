@@ -1,5 +1,3 @@
-import { userId } from "../utils/constants";
-
 export class Card {
   constructor(
     {name, link, likes, owner, _id},
@@ -16,7 +14,7 @@ export class Card {
     this.likes = likes;
     this._owner = owner;
     this._id = _id;
-    this._userId = userId;
+    this._userId = _userId;
     this._photosImageSelector = cardSettings.selectors.photosImage;
     this._photosNameSelector = cardSettings.selectors.photosName;
     this._photosButtonLikeSelector = cardSettings.selectors.photosButtonLike;

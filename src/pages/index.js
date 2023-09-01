@@ -22,20 +22,21 @@ const popupFormList = Array.from(
   document.querySelectorAll(constants.validateSettings.selectors.popupFormClass)
 );
 
-popupFormList.forEach(function (popupForm) {
-  checkValid(popupForm);
-});
-
 function createCard (item) {
   const card = new Card(item, constants.userId, constants.imageTemplate, constants.cardSettings, openPopupImage.openPopup, handleLikeCard, handleSubmitDeleteCard);
   return card.createCard();
 }
 
-function checkValid(block) {
-  const validator = new FormValidator(constants.validateSettings, block);
-  constants.validationArr.push(validator);
-  validator.enableValidation();
+const enableValidation = (config) => {
+  popupFormList.forEach((popupForm) => {
+    const validator = new FormValidator(config, popupForm);
+    const formName = popupForm.getAttribute('name');
+    constants.formValidators[formName] = validator;
+    validator.enableValidation();
+  })
 }
+
+enableValidation(constants.validateSettings);
 
 function handleSubmitUser(data) {
   popupFormProfile.rendererLoading(true);
@@ -67,8 +68,7 @@ function handleLikeCard (card) {
       card.likes = res.likes;
       card.updateLikes();
     })
-    .catch(err => console.log(err))
-    .finally(() => popupFormCards.rendererLoading(false, 'Создать'))
+    .catch(err => console.log(err));
 }
 
 function handleSubmitDeleteCard (cardInstance) {
@@ -79,32 +79,35 @@ function handleSubmitDeleteCard (cardInstance) {
         cardInstance.deleteCard();
         popupDeleteCard.closePopup();
     })
+    .catch((err) => console.log(err));
   });
 }
 
 function handleSubmitAvatar (data) {
-  popupFormCards.rendererLoading(true, 'Создание...');
+  popupFormAvatar.rendererLoading(true, 'Создание...');
   api.patchAvatar(data)
     .then((res) => {
       userInfo.setUserInfo(res);
       popupFormAvatar.closePopup();
     })
+    .catch((err) => console.log(err))
+    .finally(() => popupFormAvatar.rendererLoading(false, 'Создать'));
 }
 
 constants.profileEditButton.addEventListener("click", function () {
   popupFormProfile.openPopup();
   popupFormProfile.setInputValues(userInfo.getUserInfo());
-  constants.validationArr[0].clearValidation();
+  constants.formValidators.profile.clearValidation();
 });
 
 constants.photoAddButton.addEventListener("click", function () {
   popupFormCards.openPopup();
-  constants.validationArr[1].clearValidation();
+  constants.formValidators.photo.clearValidation();
 });
 
 constants.avatarEditButton.addEventListener("click", function () {
   popupFormAvatar.openPopup();
-  constants.validationArr[2].clearValidation();
+  constants.formValidators.avatar.clearValidation();
 })
 
 openPopupImage.setEventListeners();

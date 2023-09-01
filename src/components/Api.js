@@ -18,7 +18,6 @@ export default class Api {
             headers: this._headers
         })
             .then((data) => this._checkResponse(data))
-            .catch(err => console.log(err))
     }
 
     _setData(url, method, data) {
@@ -28,8 +27,6 @@ export default class Api {
             body: JSON.stringify(data)
         })
             .then(this._checkResponse)
-            .catch(err => {
-                console.log(err)})
     }
 
     getStartDataUser() {

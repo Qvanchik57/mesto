@@ -17,7 +17,7 @@ export const discoveryDescription = imagePopup.querySelector(
 );
 export const popupAvatar = '.popup-avatar';
 export const avatarEditButton = document.querySelector('.profile__avatar-edit');
-export const validationArr = [];
+export const formValidators = {};
 export const settingsApi = {
   myUrl: "https://nomoreparties.co/v1/cohort-73",
   headers: {
